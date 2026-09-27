@@ -485,10 +485,11 @@ tbody tr:hover td {
             
             <div class="form-group">
                 <label for="role">Role</label>
-                <select id="role" name="role" required style="width: 100%; padding: 12px; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; background-color: rgba(255,255,255,0.05); color: #fff; font-size: 1rem;">
+                <select id="role" name="role" required>
                     <option value="Customer" style="color: #000;">Customer</option>
                     <option value="Collector" style="color: #000;">Collector</option>
                     <option value="Admin" style="color: #000;">Admin</option>
+                    <option value="Developer" style="color: #000;">Developer</option>
                 </select>
             </div>
             

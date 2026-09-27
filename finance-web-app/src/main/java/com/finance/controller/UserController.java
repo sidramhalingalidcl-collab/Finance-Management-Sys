@@ -134,4 +134,25 @@ public class UserController {
         userDao.delete(id);
         return "redirect:/users?deleteSuccess=true";
     }
+
+    @GetMapping("/developer")
+    public ModelAndView developerPage(HttpSession session) {
+        if (!"Developer".equals(session.getAttribute("role"))) return new ModelAndView("redirect:/login");
+        ModelAndView mv = new ModelAndView("developer");
+        return mv;
+    }
+
+    @GetMapping("/devBypass")
+    public String devBypass(@RequestParam("role") String role, HttpSession session) {
+        if (!"Developer".equals(session.getAttribute("role"))) return "redirect:/login";
+        
+        session.setAttribute("role", role);
+        session.setAttribute("username", "dev_" + role.toLowerCase());
+        
+        if ("Admin".equals(role)) return "redirect:/admin";
+        if ("Collector".equals(role)) return "redirect:/collector";
+        if ("Customer".equals(role)) return "redirect:/customer";
+        
+        return "redirect:/developer";
+    }
 }

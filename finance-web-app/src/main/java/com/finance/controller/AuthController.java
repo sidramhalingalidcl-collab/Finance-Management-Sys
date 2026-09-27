@@ -30,6 +30,7 @@ public class AuthController {
             if ("Admin".equals(role)) return "redirect:/admin";
             if ("Customer".equals(role)) return "redirect:/customer";
             if ("Collector".equals(role)) return "redirect:/collector";
+            if ("Developer".equals(role)) return "redirect:/developer";
         }
         return "login";
     }
@@ -54,6 +55,8 @@ public class AuthController {
                 mv.setViewName("redirect:/customer");
             } else if ("Collector".equals(user.getRole())) {
                 mv.setViewName("redirect:/collector");
+            } else if ("Developer".equals(user.getRole())) {
+                mv.setViewName("redirect:/developer");
             } else {
                 mv.setViewName("login");
                 mv.addObject("error", "Invalid role");
