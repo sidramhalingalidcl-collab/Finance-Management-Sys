@@ -9,3 +9,4 @@ sources.txt
 SeedLoans.class
 *.war
 .DS_Store
+/bin/

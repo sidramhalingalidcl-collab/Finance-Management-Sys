@@ -702,7 +702,7 @@
                                                             onmouseout="this.style.filter='blur(3px)'">
                                                             <%= u.getPassword() %>
                                                         </span></td>
-                                                    <td data-label="Role" style="<%=  %> font-weight: bold;">
+                                                    <td data-label="Role" style="<%= rowColor %> font-weight: bold;">
                                                         <%= u.getRole() %>
                                                     </td>
                                                     <td data-label="Action">
