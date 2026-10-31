@@ -8,13 +8,19 @@ COPY finance-web-app/src finance-web-app/src/
 
 # Change to the sub-directory to build the project
 WORKDIR /app/finance-web-app
-RUN mvn clean package
+RUN mvn clean package -DskipTests
 
 # Stage 2: Deploy to Tomcat
 FROM tomcat:9.0-jre8
 
 # Remove default webapps to ensure our app runs at root or without conflicts
 RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Disable Tomcat shutdown port (8005 -> -1) so Render port scans don't trigger shutdown warnings
+RUN sed -i 's/port="8005"/port="-1"/' /usr/local/tomcat/conf/server.xml
+
+# Faster startup entropy
+ENV JAVA_OPTS="-Djava.security.egd=file:/dev/./urandom"
 
 # Copy the built WAR file from the previous stage to Tomcat's webapps directory
 COPY --from=build /app/finance-web-app/target/finance-web-app.war /usr/local/tomcat/webapps/ROOT.war
